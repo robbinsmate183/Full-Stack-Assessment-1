@@ -1,8 +1,10 @@
 from flask import Blueprint, request, jsonify
 from database import ingredients_collection
-from routes.auth import token_required
+from routes.auth import token_required, admin_required
 from bson import ObjectId
 from bson.errors import InvalidId
+from datetime import datetime, date, timedelta
+import math 
 
 ingredients_bp = Blueprint("ingredients", __name__)
 
@@ -17,7 +19,9 @@ required_fields = [
     "storage_location"
 ]
 
+
 @ingredients_bp.post("/ingredients")
+@token_required
 def add_ingredient():
     data = request.get_json()
 
@@ -61,20 +65,130 @@ def add_ingredient():
         "id": str(result.inserted_id)
     }), 201
 
+
+
+
+
 @ingredients_bp.get("/ingredients")
 @token_required
 def get_ingredients():
-    ingredients = list(ingredients_collection.find())
+
+    search = request.args.get("search")
+    supplier = request.args.get("supplier")
+    storage_location = request.args.get("storage_location")
+
+    sort_field = request.args.get("sort", "name")
+    sort_order = request.args.get("order", "asc")
+
+    allowed_sort_fields = ["name", "stock_quantity", "purchase_cost"]
+
+    if sort_field not in allowed_sort_fields:
+        return jsonify({"error": "Invalid sort field"}), 400
+
+    if sort_order not in ["asc", "desc"]:
+        return jsonify({"error": "Invalid sort order"}), 400
+
+    direction = 1 if sort_order == "asc" else -1
+
+    page_value = request.args.get("page", "1")
+    limit_value = request.args.get("limit", "10")
+
+    if not page_value.isdigit() or not limit_value.isdigit():
+        return jsonify({"error": "Invalid page or limit"}), 400
+
+    page = int(page_value)
+    limit = int(limit_value)
+
+    if page < 1 or limit < 1 or limit > 100:
+        return jsonify({"error": "Invalid page or limit"}), 400
+
+    query = {}
+
+    if search:
+        query["name"] = {"$regex": search, "$options": "i"}
+
+    if supplier:
+        query["supplier"] = supplier
+
+    if storage_location:
+        query["storage_location"] = storage_location
+
+    total_records = ingredients_collection.count_documents(query)
+    total_pages = (total_records + limit - 1) // limit
+
+    skip = (page - 1) * limit
+
+    ingredients = list(
+        ingredients_collection.find(query)
+        .sort(sort_field, direction)
+        .skip(skip)
+        .limit(limit)
+    )
 
     for ingredient in ingredients:
         ingredient["_id"] = str(ingredient["_id"])
 
-    return jsonify(ingredients), 200
+    return jsonify({
+        "ingredients": ingredients,
+        "pagination": {
+            "page": page,
+            "limit": limit,
+            "total_records": total_records,
+            "total_pages": total_pages
+        }
+    }), 200
+
+
+@ingredients_bp.get("/ingredients/expiring")
+@token_required
+def get_expiring_ingredients():
+
+    days_value = request.args.get("days", "7")
+
+    if not days_value.isdigit():
+        return jsonify({"error": "Invalid days value"}), 400
+
+    days = int(days_value)
+
+    try:
+        today = date.today()
+        cutoff_date = today + timedelta(days=days)
+    except OverflowError:
+        return jsonify({"error": "Invalid days value"}), 400
+
+    ingredients = list(ingredients_collection.find())
+
+    expiring_ingredients = []
+
+    for ingredient in ingredients:
+
+        try:
+            expiry_date = datetime.strptime(
+                ingredient["expiry_date"], "%d/%m/%Y"
+            ).date()
+        except (ValueError, TypeError, KeyError):
+            continue
+
+        if today <= expiry_date <= cutoff_date:
+            ingredient["_id"] = str(ingredient["_id"])
+            expiring_ingredients.append(ingredient)
+
+    expiring_ingredients.sort(
+        key=lambda ingredient: datetime.strptime(
+            ingredient["expiry_date"], "%d/%m/%Y"
+        )
+    )
+
+    return jsonify(expiring_ingredients), 200
+
 
 @ingredients_bp.get("/ingredients/<ingredient_id>")
+@token_required
 def get_one_ingredient(ingredient_id):
     try:
-        ingredient = ingredients_collection.find_one({"_id": ObjectId(ingredient_id)})
+        ingredient = ingredients_collection.find_one(
+            {"_id": ObjectId(ingredient_id)}
+        )
 
     except (InvalidId, TypeError):
         return jsonify({"error": "Invalid ingredient ID"}), 400
@@ -85,7 +199,9 @@ def get_one_ingredient(ingredient_id):
     ingredient["_id"] = str(ingredient["_id"])
     return jsonify(ingredient), 200
 
+
 @ingredients_bp.patch("/ingredients/<ingredient_id>")
+@token_required
 def update_ingredient(ingredient_id):
     data = request.get_json()
 
@@ -109,7 +225,10 @@ def update_ingredient(ingredient_id):
 
     return jsonify({"message": "Ingredient updated successfully"}), 200
 
+
 @ingredients_bp.delete("/ingredients/<ingredient_id>")
+@token_required
+@admin_required
 def delete_ingredient(ingredient_id):
     try:
         result = ingredients_collection.delete_one(
@@ -123,3 +242,29 @@ def delete_ingredient(ingredient_id):
         return jsonify({"error": "Ingredient not found"}), 404
 
     return jsonify({"message": "Ingredient deleted successfully"}), 200
+
+
+@ingredients_bp.get("/ingredients/low-stock")
+@token_required
+def get_low_stock_ingredients():
+
+    threshold_value = request.args.get("threshold", "10")
+
+    try:
+        threshold = float(threshold_value)
+    except (ValueError, TypeError):
+        return jsonify({"error": "Invalid threshold"}), 400
+
+    if not math.isfinite(threshold) or threshold < 0:
+        return jsonify({"error": "Invalid threshold"}), 400
+
+    query = {
+        "stock_quantity": {"$lt": threshold}
+    }
+
+    ingredients = list(ingredients_collection.find(query))
+
+    for ingredient in ingredients:
+        ingredient["_id"] = str(ingredient["_id"])
+
+    return jsonify(ingredients), 200

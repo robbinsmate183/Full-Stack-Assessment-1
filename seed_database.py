@@ -36,5 +36,40 @@ def create_admin():
     print("Admin account created successfully")
 
 
+def create_staff():
+
+    username = "staff"
+
+    existing_user = users_collection.find_one({
+        "username": username
+    })
+
+    if existing_user is not None:
+        print("Staff account already exists")
+        return
+
+    password = getpass.getpass("Enter staff password: ")
+
+    if not password:
+        print("Password cannot be empty")
+        return
+
+    hashed_password = bcrypt.hashpw(
+        bytes(password, "UTF-8"),
+        bcrypt.gensalt()
+    )
+
+    staff = {
+        "username": username,
+        "password": hashed_password,
+        "role": "staff"
+    }
+
+    users_collection.insert_one(staff)
+
+    print("Staff account created successfully")
+
+
 if __name__ == "__main__":
     create_admin()
+    create_staff()

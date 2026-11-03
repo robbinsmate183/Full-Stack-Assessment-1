@@ -1,10 +1,9 @@
 from flask import Blueprint, request, jsonify
 from database import users_collection
 from dotenv import load_dotenv
+from bson import ObjectId
 from functools import wraps
 import jwt, bcrypt, datetime, os
-
-
 
 load_dotenv()
 
@@ -41,6 +40,7 @@ def login():
                 )
 
                 return jsonify({"token": token}), 200
+
     return jsonify({"error": "Invalid username or password"}), 401
 
 
@@ -85,10 +85,193 @@ def admin_required(f):
             algorithms=["HS256"]
         )
 
-        if data["role"] != "admin":
+        if data.get("role") != "admin":
             return jsonify({"error": "Admin access required"}), 403
-      
+
         return f(*args, **kwargs)
 
     return decorated
 
+
+
+@auth_bp.post("/users")
+@token_required
+@admin_required
+def create_user():
+
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return jsonify({"error": "Invalid user data"}), 400
+
+    required_fields = ["username", "password", "role"]
+
+    for field in required_fields:
+        if field not in data:
+            return jsonify({"error": "Missing required field", "field": field}), 400
+
+    username = data["username"]
+    password = data["password"]
+    role = data["role"]
+
+    if not isinstance(username, str) or not username.strip():
+        return jsonify({"error": "Invalid username"}), 400
+
+    username = username.strip()
+
+    if not isinstance(password, str) or not password or len(password.encode("utf-8")) > 72:
+        return jsonify({"error": "Invalid password"}), 400
+
+    if not isinstance(role, str) or role not in ["staff", "admin"]:
+        return jsonify({"error": "Invalid role"}), 400
+
+    existing_user = users_collection.find_one({"username": username})
+
+    if existing_user is not None:
+        return jsonify({"error": "Username already exists"}), 409
+
+    hashed_password = bcrypt.hashpw(
+        bytes(password, "UTF-8"),
+        bcrypt.gensalt()
+    )
+
+    result = users_collection.insert_one({
+        "username": username,
+        "password": hashed_password,
+        "role": role
+    })
+
+    return jsonify({
+        "message": "User created successfully",
+        "id": str(result.inserted_id)
+    }), 201
+
+
+
+@auth_bp.get("/users")
+@token_required
+@admin_required
+def get_users():
+
+    users = list(users_collection.find({}, {"password": 0}))
+
+    for user in users:
+        user["_id"] = str(user["_id"])
+
+    return jsonify(users), 200
+
+
+@auth_bp.get("/users/<user_id>")
+@token_required
+@admin_required
+def get_one_user(user_id):
+
+    if not ObjectId.is_valid(user_id):
+        return jsonify({"error": "Invalid user ID"}), 400
+
+    user = users_collection.find_one(
+        {"_id": ObjectId(user_id)},
+        {"password": 0}
+    )
+
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+
+    user["_id"] = str(user["_id"])
+
+    return jsonify(user), 200
+
+
+@auth_bp.patch("/users/<user_id>")
+@token_required
+@admin_required
+def update_user(user_id):
+
+    if not ObjectId.is_valid(user_id):
+        return jsonify({"error": "Invalid user ID"}), 400
+
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict) or not data:
+        return jsonify({"error": "No update data provided"}), 400
+
+    allowed_fields = ["username", "password", "role"]
+
+    for field in data:
+        if field not in allowed_fields:
+            return jsonify({"error": "Invalid field", "field": field}), 400
+
+    user = users_collection.find_one({"_id": ObjectId(user_id)})
+
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+
+    if "username" in data:
+
+        if not isinstance(data["username"], str) or not data["username"].strip():
+            return jsonify({"error": "Invalid username"}), 400
+
+        data["username"] = data["username"].strip()
+
+        existing_user = users_collection.find_one({
+            "username": data["username"]
+        })
+
+        if existing_user is not None and existing_user["_id"] != user["_id"]:
+            return jsonify({"error": "Username already exists"}), 409
+
+    if "password" in data:
+
+        password = data["password"]
+
+        if not isinstance(password, str) or not password or len(password.encode("utf-8")) > 72:
+            return jsonify({"error": "Invalid password"}), 400
+
+        data["password"] = bcrypt.hashpw(
+            bytes(password, "UTF-8"),
+            bcrypt.gensalt()
+        )
+
+    if "role" in data:
+
+        if not isinstance(data["role"], str) or data["role"] not in ["staff", "admin"]:
+            return jsonify({"error": "Invalid role"}), 400
+
+        if user["role"] == "admin" and data["role"] == "staff":
+
+            admin_count = users_collection.count_documents({"role": "admin"})
+
+            if admin_count <= 1:
+                return jsonify({"error": "Cannot demote the last admin"}), 403
+
+    users_collection.update_one(
+        {"_id": ObjectId(user_id)},
+        {"$set": data}
+    )
+
+    return jsonify({"message": "User updated successfully"}), 200
+
+
+@auth_bp.delete("/users/<user_id>")
+@token_required
+@admin_required
+def delete_user(user_id):
+
+    if not ObjectId.is_valid(user_id):
+        return jsonify({"error": "Invalid user ID"}), 400
+
+    user = users_collection.find_one({"_id": ObjectId(user_id)})
+
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+
+    if user["role"] == "admin":
+
+        admin_count = users_collection.count_documents({"role": "admin"})
+
+        if admin_count <= 1:
+            return jsonify({"error": "Cannot delete the last admin"}), 403
+
+    users_collection.delete_one({"_id": ObjectId(user_id)})
+
+    return jsonify({"message": "User deleted successfully"}), 200
