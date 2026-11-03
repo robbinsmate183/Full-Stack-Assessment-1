@@ -6,3 +6,4 @@ db = client["restaurantDB"]
 
 ingredients_collection = db["ingredients"]
 dishes_collection = db["dishes"]
+users_collection = db["users"]

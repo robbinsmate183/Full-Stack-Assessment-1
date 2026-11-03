@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from database import ingredients_collection
+from routes.auth import token_required
 from bson import ObjectId
 from bson.errors import InvalidId
 
@@ -61,6 +62,7 @@ def add_ingredient():
     }), 201
 
 @ingredients_bp.get("/ingredients")
+@token_required
 def get_ingredients():
     ingredients = list(ingredients_collection.find())
 
