@@ -1,0 +1,736 @@
+{
+  "info": {
+    "_postman_id": "5967c2c4-055e-408a-87e6-58adff7b3ac1",
+    "name": "Restaurant API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59136895",
+    "_collection_link": "https://go.postman.co/collection/59136895-5967c2c4-055e-408a-87e6-58adff7b3ac1?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "POST Admin Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Admin login returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\nif (pm.response.code === 200) {\r\n    const response = pm.response.json();\r\n    pm.collectionVariables.set(\"admin_token\", response.token);\r\n}\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{admin_password}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Staff Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Staff login returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\nif (pm.response.code === 200) {\r\n    const response = pm.response.json();\r\n    pm.collectionVariables.set(\"staff_token\", response.token);\r\n}\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "staff",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{staff_password}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET All Ingredients",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\npm.test(\"GET ingredients returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response contains an ingredients array\", function () {\r\n    const response = pm.response.json();\r\n    pm.expect(response.ingredients).to.be.an(\"array\");\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-access-token",
+            "value": ""
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/ingredients",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ingredients"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Ingredient Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"POST ingredient returns 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"Response contains the new ingredient ID\", function () {\r\n    const response = pm.response.json();\r\n    pm.expect(response.id).to.exist;\r\n});\r\n\r\nif (pm.response.code === 201) {\r\n    const response = pm.response.json();\r\n    pm.collectionVariables.set(\"test_ingredient_id\", response.id);\r\n}\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Automated Test Ingredient\",\r\n  \"stock_quantity\": 10,\r\n  \"unit\": \"kg\",\r\n  \"purchase_cost\": 2.50,\r\n  \"supplier\": \"Test Supplier\",\r\n  \"delivery_date\": \"04/11/2026\",\r\n  \"expiry_date\": \"11/11/2026\",\r\n  \"storage_location\": \"Fridge\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/ingredients",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ingredients"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH Ingredient Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"PATCH ingredient returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Ingredient updated successfully\", function () {\r\n    const response = pm.response.json();\r\n    pm.expect(response.message).to.eql(\"Ingredient updated successfully\");\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"stock_quantity\": 25,\r\n  \"purchase_cost\": 3.75\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/ingredients/{{test_ingredient_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ingredients",
+            "{{test_ingredient_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET One Ingredient Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"GET one ingredient returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Correct ingredient is returned\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response._id).to.eql(\r\n        pm.collectionVariables.get(\"test_ingredient_id\")\r\n    );\r\n\r\n    pm.expect(response.name).to.eql(\"Automated Test Ingredient\");\r\n});\r\n\r\npm.test(\"Ingredient values were updated\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response.stock_quantity).to.eql(25);\r\n    pm.expect(response.purchase_cost).to.eql(3.75);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/ingredients/{{test_ingredient_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ingredients",
+            "{{test_ingredient_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE Ingredient  Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"DELETE ingredient returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Ingredient deleted successfully\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response.message).to.eql(\r\n        \"Ingredient deleted successfully\"\r\n    );\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/ingredients/{{test_ingredient_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ingredients",
+            "{{test_ingredient_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Deleted Ingredient Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Deleted ingredient returns 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/ingredients/{{test_ingredient_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ingredients",
+            "{{test_ingredient_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Dish Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"POST dish returns 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"Response contains new dish ID\", function () {\r\n    const response = pm.response.json();\r\n    pm.expect(response.id).to.exist;\r\n});\r\n\r\nif (pm.response.code === 201) {\r\n    const response = pm.response.json();\r\n    pm.collectionVariables.set(\"test_dish_id\", response.id);\r\n}\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Automated Test Dish\",\r\n  \"category\": \"Mains\",\r\n  \"selling_price\": 12.5,\r\n  \"ingredients\": [\r\n    {\r\n      \"ingredient_id\": \"09fad7030dbe07b1953136e4\",\r\n      \"ingredient_name\": \"Beef Sirloin\",\r\n      \"quantity\": 0.25,\r\n      \"unit\": \"kg\"\r\n    }\r\n  ]\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/dishes",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH Dish Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"PATCH dish returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Dish updated successfully\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response.message).to.eql(\"Dish updated successfully\");\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Updated Automated Test Dish\",\r\n  \"selling_price\": 15.75\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/dishes/{{test_dish_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes",
+            "{{test_dish_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET One Dish Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"GET one dish returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Dish changes were saved correctly\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response._id).to.eql(\r\n        pm.collectionVariables.get(\"test_dish_id\")\r\n    );\r\n\r\n    pm.expect(response.name).to.eql(\"Updated Automated Test Dish\");\r\n    pm.expect(response.selling_price).to.eql(15.75);\r\n});\r\n\r\npm.test(\"Embedded ingredient was preserved\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response.ingredients).to.be.an(\"array\");\r\n    pm.expect(response.ingredients).to.have.lengthOf(1);\r\n    pm.expect(response.ingredients[0].ingredient_name).to.eql(\"Beef Sirloin\");\r\n    pm.expect(response.ingredients[0].quantity).to.eql(0.25);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/dishes/{{test_dish_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes",
+            "{{test_dish_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Embedded Ingredient Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"POST embedded ingredient returns 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"Embedded ingredient added successfully\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response.message).to.eql(\r\n        \"Ingredient added to dish successfully\"\r\n    );\r\n\r\n    pm.expect(response.id).to.exist;\r\n});\r\n\r\nif (pm.response.code === 201) {\r\n    const response = pm.response.json();\r\n\r\n    pm.collectionVariables.set(\"test_entry_id\", response.id);\r\n}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"ingredient_id\": \"09fad7030dbe07b1953136e4\",\r\n  \"ingredient_name\": \"Beef Sirloin\",\r\n  \"quantity\": 0.15,\r\n  \"unit\": \"kg\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/dishes/{{test_dish_id}}/ingredients",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes",
+            "{{test_dish_id}}",
+            "ingredients"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET All Embedded Ingredients Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"GET embedded ingredients returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Dish contains embedded ingredients\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response).to.be.an(\"array\");\r\n    pm.expect(response.length).to.be.at.least(2);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/dishes/{{test_dish_id}}/ingredients",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes",
+            "{{test_dish_id}}",
+            "ingredients"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET One Embedded Ingredient Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"GET one embedded ingredient returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Correct embedded ingredient returned\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response._id).to.eql(\r\n        pm.collectionVariables.get(\"test_entry_id\")\r\n    );\r\n\r\n    pm.expect(response.ingredient_name).to.eql(\"Beef Sirloin\");\r\n    pm.expect(response.quantity).to.eql(0.15);\r\n    pm.expect(response.unit).to.eql(\"kg\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/dishes/{{test_dish_id}}/ingredients/{{test_entry_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes",
+            "{{test_dish_id}}",
+            "ingredients",
+            "{{test_entry_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH Embedded Ingredient Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"PATCH embedded ingredient returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Embedded ingredient updated successfully\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response.message).to.eql(\r\n        \"Embedded ingredient updated successfully\"\r\n    );\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"quantity\": 0.30\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/dishes/{{test_dish_id}}/ingredients/{{test_entry_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes",
+            "{{test_dish_id}}",
+            "ingredients",
+            "{{test_entry_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Updated Embedded Ingredient Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"GET updated embedded ingredient returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Embedded ingredient quantity was updated\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response._id).to.eql(\r\n        pm.collectionVariables.get(\"test_entry_id\")\r\n    );\r\n\r\n    pm.expect(response.quantity).to.eql(0.30);\r\n    pm.expect(response.unit).to.eql(\"kg\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/dishes/{{test_dish_id}}/ingredients/{{test_entry_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes",
+            "{{test_dish_id}}",
+            "ingredients",
+            "{{test_entry_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE Embedded Ingredient Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"DELETE embedded ingredient returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Embedded ingredient deleted successfully\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response.message).to.eql(\r\n        \"Embedded ingredient deleted successfully\"\r\n    );\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/dishes/{{test_dish_id}}/ingredients/{{test_entry_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes",
+            "{{test_dish_id}}",
+            "ingredients",
+            "{{test_entry_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Deleted Embedded Ingredient Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Deleted embedded ingredient returns 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});\r\n\r\npm.test(\"Embedded ingredient not found\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response.error).to.eql(\"Embedded ingredient not found\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/dishes/{{test_dish_id}}/ingredients/{{test_entry_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes",
+            "{{test_dish_id}}",
+            "ingredients",
+            "{{test_entry_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE Dish Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"DELETE dish returns 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Dish deleted successfully\", function () {\r\n    const response = pm.response.json();\r\n\r\n    pm.expect(response.message).to.eql(\"Dish deleted successfully\");\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/dishes/{{test_dish_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes",
+            "{{test_dish_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Deleted Dish Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Deleted dish returns 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/dishes/{{test_dish_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dishes",
+            "{{test_dish_id}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-access-token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{admin_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "json_web_token_195s",
+      "secret": true
+    },
+    {
+      "key": "base_url",
+      "value": ""
+    },
+    {
+      "key": "admin_token",
+      "value": ""
+    },
+    {
+      "key": "staff_token",
+      "value": ""
+    },
+    {
+      "key": "json_web_token_18et",
+      "secret": true
+    },
+    {
+      "key": "test_ingredient_id",
+      "value": ""
+    },
+    {
+      "key": "test_dish_id",
+      "value": ""
+    },
+    {
+      "key": "test_entry_id",
+      "value": ""
+    }
+  ]
+}

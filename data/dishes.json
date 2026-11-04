@@ -1,0 +1,1128 @@
+[
+  {
+    "_id": {
+      "$oid": "78b1ac522c06d1f1c90856d4"
+    },
+    "name": "Garlic Mushrooms",
+    "category": "Starter",
+    "selling_price": 7.5,
+    "ingredients": [
+      {
+        "_id": "b78b5187b05ac7bb59ac0e97",
+        "ingredient_id": "f95e51381eebfc2e7b1c744b",
+        "ingredient_name": "Mushrooms",
+        "quantity": 0.18,
+        "unit": "kg"
+      },
+      {
+        "_id": "a5679dbe9bcefb814181d8cb",
+        "ingredient_id": "472f0c34b707c93682cea31c",
+        "ingredient_name": "Garlic",
+        "quantity": 0.01,
+        "unit": "kg"
+      },
+      {
+        "_id": "9bc83773d5a33180b2ef7c10",
+        "ingredient_id": "9fc41aef275ebe201071f531",
+        "ingredient_name": "Butter",
+        "quantity": 0.025,
+        "unit": "kg"
+      },
+      {
+        "_id": "08b27e41ee091434465a8e8c",
+        "ingredient_id": "acafe54a632f8942bb9a6255",
+        "ingredient_name": "Fresh Parsley",
+        "quantity": 0.005,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "e381d0662687771e2dda9cff"
+    },
+    "name": "Prawn Cocktail",
+    "category": "Starter",
+    "selling_price": 9.5,
+    "ingredients": [
+      {
+        "_id": "80b84a9769359605ef7acf2a",
+        "ingredient_id": "57bd620d88df500807b76714",
+        "ingredient_name": "Prawns",
+        "quantity": 0.12,
+        "unit": "kg"
+      },
+      {
+        "_id": "eb70a7c178d77011fb82cbd9",
+        "ingredient_id": "4af601dfb241c159aaee482b",
+        "ingredient_name": "Lettuce",
+        "quantity": 0.05,
+        "unit": "kg"
+      },
+      {
+        "_id": "8b81ceb14481630bcdf6173d",
+        "ingredient_id": "d518dcf02c2b62c602a4f3b5",
+        "ingredient_name": "Mayonnaise",
+        "quantity": 0.04,
+        "unit": "kg"
+      },
+      {
+        "_id": "b57d82d3c49cb876f88b7a99",
+        "ingredient_id": "02aa8746c5f41b01f84b4210",
+        "ingredient_name": "Lemons",
+        "quantity": 0.03,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "27d8e4911eb96590ee4bbbe1"
+    },
+    "name": "Tomato and Basil Soup",
+    "category": "Starter",
+    "selling_price": 6.5,
+    "ingredients": [
+      {
+        "_id": "f6361324e228655f15f04aa7",
+        "ingredient_id": "4a7c85c9d870000950116090",
+        "ingredient_name": "Tomatoes",
+        "quantity": 0.2,
+        "unit": "kg"
+      },
+      {
+        "_id": "5ffe9558b7221c9b3c0085c2",
+        "ingredient_id": "f37dc155ea7e4f9e4f2b9846",
+        "ingredient_name": "Onions",
+        "quantity": 0.05,
+        "unit": "kg"
+      },
+      {
+        "_id": "49f88985d5420ac4cebeaa1b",
+        "ingredient_id": "d4eb88646457d8aa8882704c",
+        "ingredient_name": "Vegetable Stock",
+        "quantity": 0.2,
+        "unit": "L"
+      },
+      {
+        "_id": "bdd01ea10e2421471faba814",
+        "ingredient_id": "3730105e939f587948bc1ae8",
+        "ingredient_name": "Fresh Basil",
+        "quantity": 0.008,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "d7880c97865f82130d3ae619"
+    },
+    "name": "Goats Cheese Salad",
+    "category": "Starter",
+    "selling_price": 9,
+    "ingredients": [
+      {
+        "_id": "426d4682978332ac3fb5e669",
+        "ingredient_id": "8778e6bf4188a8c8cc0facc0",
+        "ingredient_name": "Goats Cheese",
+        "quantity": 0.08,
+        "unit": "kg"
+      },
+      {
+        "_id": "c3d17381112ad43d690cea0b",
+        "ingredient_id": "41f45aff2cf2d35a62bc32da",
+        "ingredient_name": "Rocket",
+        "quantity": 0.04,
+        "unit": "kg"
+      },
+      {
+        "_id": "fccb214a167dcf017643eb4a",
+        "ingredient_id": "ac1c411abc6d2edaee1c34e9",
+        "ingredient_name": "Beetroot",
+        "quantity": 0.1,
+        "unit": "kg"
+      },
+      {
+        "_id": "a9ea13fb404f479e74cb6257",
+        "ingredient_id": "5509d6763983ae21599e187b",
+        "ingredient_name": "Balsamic Vinegar",
+        "quantity": 0.015,
+        "unit": "L"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "bb5bb7bf236d7cf6348338b4"
+    },
+    "name": "Mussels in Cream Sauce",
+    "category": "Starter",
+    "selling_price": 10,
+    "ingredients": [
+      {
+        "_id": "329aa2cf50b7c8efb4f837bc",
+        "ingredient_id": "0a33263c5a2c0e45cefb40d7",
+        "ingredient_name": "Mussels",
+        "quantity": 0.25,
+        "unit": "kg"
+      },
+      {
+        "_id": "b6e0da8b65c2a14d10d0c056",
+        "ingredient_id": "23694aaccea6e8041a381ec1",
+        "ingredient_name": "Double Cream",
+        "quantity": 0.08,
+        "unit": "L"
+      },
+      {
+        "_id": "02d9ba802c7be3c17163256f",
+        "ingredient_id": "472f0c34b707c93682cea31c",
+        "ingredient_name": "Garlic",
+        "quantity": 0.01,
+        "unit": "kg"
+      },
+      {
+        "_id": "b65a6fcd00f12283c3097fb3",
+        "ingredient_id": "acafe54a632f8942bb9a6255",
+        "ingredient_name": "Fresh Parsley",
+        "quantity": 0.005,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "a0d05673192a1ba37e7633c6"
+    },
+    "name": "Crispy Chicken Bites",
+    "category": "Starter",
+    "selling_price": 8.5,
+    "ingredients": [
+      {
+        "_id": "e4612069add627d79fcaa52c",
+        "ingredient_id": "e09f6602ee7b50aa407faaaa",
+        "ingredient_name": "Chicken Breast",
+        "quantity": 0.15,
+        "unit": "kg"
+      },
+      {
+        "_id": "17c3d46cffe21f9ebcaba1e1",
+        "ingredient_id": "a6054382adcdaf482ad9213f",
+        "ingredient_name": "Plain Flour",
+        "quantity": 0.04,
+        "unit": "kg"
+      },
+      {
+        "_id": "0a7272aa45281cd8ecaa752f",
+        "ingredient_id": "a833b2189b5a7140be8ad8f6",
+        "ingredient_name": "Eggs",
+        "quantity": 1,
+        "unit": "each"
+      },
+      {
+        "_id": "9fd7c8ac5d7e8a546f5d40fe",
+        "ingredient_id": "2b53dc2ddbc2fd423a187508",
+        "ingredient_name": "Breadcrumbs",
+        "quantity": 0.05,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "c71840fa9aa057937de70f8e"
+    },
+    "name": "Sirloin Steak and Chips",
+    "category": "Main",
+    "selling_price": 29,
+    "ingredients": [
+      {
+        "_id": "9294ab28ce495de81bf2a26c",
+        "ingredient_id": "09fad7030dbe07b1953136e4",
+        "ingredient_name": "Beef Sirloin",
+        "quantity": 0.25,
+        "unit": "kg"
+      },
+      {
+        "_id": "71e76a2cc68a3fc187ea8ff3",
+        "ingredient_id": "2f79ceaa7c97b0e7608c9788",
+        "ingredient_name": "Potatoes",
+        "quantity": 0.25,
+        "unit": "kg"
+      },
+      {
+        "_id": "2ac3fc3a1261e9520561355e",
+        "ingredient_id": "9fc41aef275ebe201071f531",
+        "ingredient_name": "Butter",
+        "quantity": 0.025,
+        "unit": "kg"
+      },
+      {
+        "_id": "870becf42c6d7d6568ad77b1",
+        "ingredient_id": "2bb6cde17ca5a928ad8f56f7",
+        "ingredient_name": "Black Pepper",
+        "quantity": 0.002,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "c5f4dbe436718b84fe78524a"
+    },
+    "name": "Ribeye Steak and Mash",
+    "category": "Main",
+    "selling_price": 33,
+    "ingredients": [
+      {
+        "_id": "32098d83b01b2535f224910a",
+        "ingredient_id": "80ba3547e63bb0b38c6786c1",
+        "ingredient_name": "Beef Ribeye",
+        "quantity": 0.28,
+        "unit": "kg"
+      },
+      {
+        "_id": "d34b2205a514e8885c9cf346",
+        "ingredient_id": "2f79ceaa7c97b0e7608c9788",
+        "ingredient_name": "Potatoes",
+        "quantity": 0.25,
+        "unit": "kg"
+      },
+      {
+        "_id": "f8f4b209aecfe2e0bd9c3af0",
+        "ingredient_id": "5f021553b1e5a32e0ef97b14",
+        "ingredient_name": "Whole Milk",
+        "quantity": 0.05,
+        "unit": "L"
+      },
+      {
+        "_id": "9ac7426ee74fd80a722cf87f",
+        "ingredient_id": "9fc41aef275ebe201071f531",
+        "ingredient_name": "Butter",
+        "quantity": 0.03,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "68f812c76bc19aa726ee5468"
+    },
+    "name": "Pan Fried Salmon",
+    "category": "Main",
+    "selling_price": 22,
+    "ingredients": [
+      {
+        "_id": "502542c57fb034a64f548611",
+        "ingredient_id": "10becb907a08cdffa9672398",
+        "ingredient_name": "Salmon Fillet",
+        "quantity": 0.2,
+        "unit": "kg"
+      },
+      {
+        "_id": "07afc92be25980bb4f3a5557",
+        "ingredient_id": "c94bcc3889ac7021f8cbbb6f",
+        "ingredient_name": "Broccoli",
+        "quantity": 0.15,
+        "unit": "kg"
+      },
+      {
+        "_id": "739f387dd2ab3f94474bbcef",
+        "ingredient_id": "2f79ceaa7c97b0e7608c9788",
+        "ingredient_name": "Potatoes",
+        "quantity": 0.2,
+        "unit": "kg"
+      },
+      {
+        "_id": "4661a61a1e4225c33afc7dce",
+        "ingredient_id": "02aa8746c5f41b01f84b4210",
+        "ingredient_name": "Lemons",
+        "quantity": 0.04,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "7117c2e630b97fad9e62f350"
+    },
+    "name": "Beer Battered Cod",
+    "category": "Main",
+    "selling_price": 19,
+    "ingredients": [
+      {
+        "_id": "215ceaa48fc102e04a73a9cb",
+        "ingredient_id": "6791adf89f4f788e6c2cfbf6",
+        "ingredient_name": "Cod Fillet",
+        "quantity": 0.2,
+        "unit": "kg"
+      },
+      {
+        "_id": "9b6d5dc8c38260608044f283",
+        "ingredient_id": "a6054382adcdaf482ad9213f",
+        "ingredient_name": "Plain Flour",
+        "quantity": 0.09,
+        "unit": "kg"
+      },
+      {
+        "_id": "6f05e1615299f91babce8c22",
+        "ingredient_id": "2f79ceaa7c97b0e7608c9788",
+        "ingredient_name": "Potatoes",
+        "quantity": 0.3,
+        "unit": "kg"
+      },
+      {
+        "_id": "83f63937b05060cdbe1265b3",
+        "ingredient_id": "22295f44fe5fa63663709674",
+        "ingredient_name": "Peas",
+        "quantity": 0.12,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "1a87fb269e17c09f341506ed"
+    },
+    "name": "Chicken Curry and Rice",
+    "category": "Main",
+    "selling_price": 17,
+    "ingredients": [
+      {
+        "_id": "6053b433eb945f04a16be345",
+        "ingredient_id": "e09f6602ee7b50aa407faaaa",
+        "ingredient_name": "Chicken Breast",
+        "quantity": 0.2,
+        "unit": "kg"
+      },
+      {
+        "_id": "dfef3ce16b9b26d1cbefc51d",
+        "ingredient_id": "25f902351449d32bd9e8d206",
+        "ingredient_name": "Coconut Milk",
+        "quantity": 0.15,
+        "unit": "L"
+      },
+      {
+        "_id": "8963eedfd37c9e466f1f3f35",
+        "ingredient_id": "7bb448a1d8607ee12b024249",
+        "ingredient_name": "Basmati Rice",
+        "quantity": 0.09,
+        "unit": "kg"
+      },
+      {
+        "_id": "9b984254b5a4010b9a75a353",
+        "ingredient_id": "83d1e630743634505ab0f144",
+        "ingredient_name": "Curry Powder",
+        "quantity": 0.012,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "6849b8ec5f988df1384dd43a"
+    },
+    "name": "Beef Bolognese",
+    "category": "Main",
+    "selling_price": 16,
+    "ingredients": [
+      {
+        "_id": "594973807611d2765b8b6aae",
+        "ingredient_id": "6c1ca93f9d4778509161468d",
+        "ingredient_name": "Beef Mince",
+        "quantity": 0.18,
+        "unit": "kg"
+      },
+      {
+        "_id": "5562c88b024ed87b3e5b9f20",
+        "ingredient_id": "91a4c259346f5377e18b79ae",
+        "ingredient_name": "Spaghetti",
+        "quantity": 0.12,
+        "unit": "kg"
+      },
+      {
+        "_id": "6adaded6e771082b885aaa27",
+        "ingredient_id": "2efe455ada3ff58c9a212241",
+        "ingredient_name": "Chopped Tomatoes",
+        "quantity": 0.2,
+        "unit": "kg"
+      },
+      {
+        "_id": "5770d7b4f915cbc1e7d13c69",
+        "ingredient_id": "f37dc155ea7e4f9e4f2b9846",
+        "ingredient_name": "Onions",
+        "quantity": 0.06,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "62e1a79e7c7a50b3904d3f1a"
+    },
+    "name": "Mushroom Risotto",
+    "category": "Main",
+    "selling_price": 16,
+    "ingredients": [
+      {
+        "_id": "b1ad6e87d8ba6f85885820ed",
+        "ingredient_id": "a0eb8b16a99d3d7ea8626361",
+        "ingredient_name": "Arborio Rice",
+        "quantity": 0.1,
+        "unit": "kg"
+      },
+      {
+        "_id": "78639fd8b2e119b2e7e38320",
+        "ingredient_id": "f95e51381eebfc2e7b1c744b",
+        "ingredient_name": "Mushrooms",
+        "quantity": 0.15,
+        "unit": "kg"
+      },
+      {
+        "_id": "0dd37fc388cafaf3c21632e6",
+        "ingredient_id": "d4eb88646457d8aa8882704c",
+        "ingredient_name": "Vegetable Stock",
+        "quantity": 0.3,
+        "unit": "L"
+      },
+      {
+        "_id": "67062fdbb04b8e20a6fe7440",
+        "ingredient_id": "f30afccfa10020d7c0f3264a",
+        "ingredient_name": "Parmesan",
+        "quantity": 0.025,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "0396c027759f321e089e945a"
+    },
+    "name": "Roast Pork Belly",
+    "category": "Main",
+    "selling_price": 21,
+    "ingredients": [
+      {
+        "_id": "3e4dcb51dd667b3272c4725d",
+        "ingredient_id": "60bd7fdc3fe0e7de6a3bde2b",
+        "ingredient_name": "Pork Belly",
+        "quantity": 0.24,
+        "unit": "kg"
+      },
+      {
+        "_id": "c7bb90c273b9c20786e11283",
+        "ingredient_id": "4792aef62051880f15634f87",
+        "ingredient_name": "Carrots",
+        "quantity": 0.12,
+        "unit": "kg"
+      },
+      {
+        "_id": "d6428cf12fd5021e21c6173f",
+        "ingredient_id": "2f79ceaa7c97b0e7608c9788",
+        "ingredient_name": "Potatoes",
+        "quantity": 0.2,
+        "unit": "kg"
+      },
+      {
+        "_id": "2649de703bb259052c4285d0",
+        "ingredient_id": "18debec62105de76caa0434a",
+        "ingredient_name": "Chicken Stock",
+        "quantity": 0.1,
+        "unit": "L"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "2393e42955e62b1c9c8eee82"
+    },
+    "name": "Lamb Rump with Greens",
+    "category": "Main",
+    "selling_price": 28,
+    "ingredients": [
+      {
+        "_id": "c9e00d79cfaa1f2643b4ac9b",
+        "ingredient_id": "e004ffcf588ede7b9d5012a0",
+        "ingredient_name": "Lamb Rump",
+        "quantity": 0.22,
+        "unit": "kg"
+      },
+      {
+        "_id": "5cf6d461ad91ed2d6470d3c1",
+        "ingredient_id": "4e994490534d1d0f955aa873",
+        "ingredient_name": "Green Beans",
+        "quantity": 0.12,
+        "unit": "kg"
+      },
+      {
+        "_id": "10d893e3619e23cab9c9fb43",
+        "ingredient_id": "2f79ceaa7c97b0e7608c9788",
+        "ingredient_name": "Potatoes",
+        "quantity": 0.18,
+        "unit": "kg"
+      },
+      {
+        "_id": "730c6357f5476e829be8a701",
+        "ingredient_id": "8edfba369b49e4a4513d3082",
+        "ingredient_name": "Fresh Thyme",
+        "quantity": 0.004,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "287a866c5960c8c70b4bbe3c"
+    },
+    "name": "Chicken Caesar Salad",
+    "category": "Main",
+    "selling_price": 16,
+    "ingredients": [
+      {
+        "_id": "8a3b7b06dc32be8e0947ecb5",
+        "ingredient_id": "e09f6602ee7b50aa407faaaa",
+        "ingredient_name": "Chicken Breast",
+        "quantity": 0.17,
+        "unit": "kg"
+      },
+      {
+        "_id": "c1a649e6a6b3acabec7cb060",
+        "ingredient_id": "4af601dfb241c159aaee482b",
+        "ingredient_name": "Lettuce",
+        "quantity": 0.13,
+        "unit": "kg"
+      },
+      {
+        "_id": "0b8626fbfb13ffaaedcd39c0",
+        "ingredient_id": "f30afccfa10020d7c0f3264a",
+        "ingredient_name": "Parmesan",
+        "quantity": 0.025,
+        "unit": "kg"
+      },
+      {
+        "_id": "910bc477b46cc7842b721cd3",
+        "ingredient_id": "d518dcf02c2b62c602a4f3b5",
+        "ingredient_name": "Mayonnaise",
+        "quantity": 0.04,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "e1e33cf30b020e8591dbdc24"
+    },
+    "name": "Vegetable Pasta Bake",
+    "category": "Main",
+    "selling_price": 15,
+    "ingredients": [
+      {
+        "_id": "f631d4d9cfabb5f5b7cd5339",
+        "ingredient_id": "58a9db7dee697b35f4551251",
+        "ingredient_name": "Penne Pasta",
+        "quantity": 0.12,
+        "unit": "kg"
+      },
+      {
+        "_id": "20902842852090f518d34569",
+        "ingredient_id": "a99ed046ca9e82bc3a916f75",
+        "ingredient_name": "Courgette",
+        "quantity": 0.1,
+        "unit": "kg"
+      },
+      {
+        "_id": "9a0c523db63da3b58abd5a77",
+        "ingredient_id": "2efe455ada3ff58c9a212241",
+        "ingredient_name": "Chopped Tomatoes",
+        "quantity": 0.2,
+        "unit": "kg"
+      },
+      {
+        "_id": "394efb95cbe9430a2b16dcde",
+        "ingredient_id": "025cd907806af9aa78d11866",
+        "ingredient_name": "Mozzarella",
+        "quantity": 0.06,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "f444997def683ecfb806088b"
+    },
+    "name": "Chickpea and Spinach Curry",
+    "category": "Main",
+    "selling_price": 15,
+    "ingredients": [
+      {
+        "_id": "ed7ecfcbd8f6010e13c60048",
+        "ingredient_id": "e01af7065e53052730c0a579",
+        "ingredient_name": "Chickpeas",
+        "quantity": 0.16,
+        "unit": "kg"
+      },
+      {
+        "_id": "a7217a2521af751dec048dce",
+        "ingredient_id": "f53f58e1429bc88dfd6523e4",
+        "ingredient_name": "Spinach",
+        "quantity": 0.1,
+        "unit": "kg"
+      },
+      {
+        "_id": "1c85dabbc601973360819af7",
+        "ingredient_id": "25f902351449d32bd9e8d206",
+        "ingredient_name": "Coconut Milk",
+        "quantity": 0.16,
+        "unit": "L"
+      },
+      {
+        "_id": "f043d5485281270a8af0b67d",
+        "ingredient_id": "7bb448a1d8607ee12b024249",
+        "ingredient_name": "Basmati Rice",
+        "quantity": 0.09,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "b1ced8fcd52be03f0eb3d604"
+    },
+    "name": "Duck Breast with Mash",
+    "category": "Main",
+    "selling_price": 25,
+    "ingredients": [
+      {
+        "_id": "839905c1ad64ef1c9ec6cd9e",
+        "ingredient_id": "30d7c21b702ce2e649da3ee9",
+        "ingredient_name": "Duck Breast",
+        "quantity": 0.22,
+        "unit": "kg"
+      },
+      {
+        "_id": "e3bfe3640fcd7a7b6642b10d",
+        "ingredient_id": "2f79ceaa7c97b0e7608c9788",
+        "ingredient_name": "Potatoes",
+        "quantity": 0.22,
+        "unit": "kg"
+      },
+      {
+        "_id": "ab77a5f67afed2ad98148b76",
+        "ingredient_id": "9fc41aef275ebe201071f531",
+        "ingredient_name": "Butter",
+        "quantity": 0.025,
+        "unit": "kg"
+      },
+      {
+        "_id": "a082e75ac36b3e7e80e0f227",
+        "ingredient_id": "4e994490534d1d0f955aa873",
+        "ingredient_name": "Green Beans",
+        "quantity": 0.1,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "13afaa373fe649449c44c438"
+    },
+    "name": "Haddock and Leek Bake",
+    "category": "Main",
+    "selling_price": 20,
+    "ingredients": [
+      {
+        "_id": "87e54e474eb563179aa48464",
+        "ingredient_id": "694e71432ef2945931efbecf",
+        "ingredient_name": "Haddock Fillet",
+        "quantity": 0.2,
+        "unit": "kg"
+      },
+      {
+        "_id": "20ad17e9289225681d22b7f3",
+        "ingredient_id": "071b1ed8e7e9316512b44adb",
+        "ingredient_name": "Leeks",
+        "quantity": 0.12,
+        "unit": "kg"
+      },
+      {
+        "_id": "1a98b92c1e7c54b7b09aaff9",
+        "ingredient_id": "23694aaccea6e8041a381ec1",
+        "ingredient_name": "Double Cream",
+        "quantity": 0.1,
+        "unit": "L"
+      },
+      {
+        "_id": "48ce47e5f4f28a9d37f0dd34",
+        "ingredient_id": "3c2d8a58d207e747f299aaf7",
+        "ingredient_name": "Cheddar",
+        "quantity": 0.04,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "8565dd9e0b93a22d0094aa7d"
+    },
+    "name": "Skinny Fries",
+    "category": "Side",
+    "selling_price": 4.5,
+    "ingredients": [
+      {
+        "_id": "2f27a67512fdc75db3525f6b",
+        "ingredient_id": "2f79ceaa7c97b0e7608c9788",
+        "ingredient_name": "Potatoes",
+        "quantity": 0.22,
+        "unit": "kg"
+      },
+      {
+        "_id": "a1da57b621acaace1aaa8e72",
+        "ingredient_id": "3985a90f5a09e6ec269ccab3",
+        "ingredient_name": "Vegetable Oil",
+        "quantity": 0.025,
+        "unit": "L"
+      },
+      {
+        "_id": "07c10a7985b8ff41504c6eb6",
+        "ingredient_id": "eccbb4e7a40aa57d1b251e20",
+        "ingredient_name": "Sea Salt",
+        "quantity": 0.003,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "9975f6325f68e371d05ddde8"
+    },
+    "name": "Creamy Mash",
+    "category": "Side",
+    "selling_price": 4.5,
+    "ingredients": [
+      {
+        "_id": "9449d81f903ae9448e9367ed",
+        "ingredient_id": "2f79ceaa7c97b0e7608c9788",
+        "ingredient_name": "Potatoes",
+        "quantity": 0.22,
+        "unit": "kg"
+      },
+      {
+        "_id": "4e807543f3bc337f3abc7cfd",
+        "ingredient_id": "9fc41aef275ebe201071f531",
+        "ingredient_name": "Butter",
+        "quantity": 0.03,
+        "unit": "kg"
+      },
+      {
+        "_id": "41ce83c084f5e66ef1f080bc",
+        "ingredient_id": "5f021553b1e5a32e0ef97b14",
+        "ingredient_name": "Whole Milk",
+        "quantity": 0.06,
+        "unit": "L"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "cdfb515fb0b70a1785e72cde"
+    },
+    "name": "Garlic Green Beans",
+    "category": "Side",
+    "selling_price": 5,
+    "ingredients": [
+      {
+        "_id": "5e584fbc6dc8915996115ddc",
+        "ingredient_id": "4e994490534d1d0f955aa873",
+        "ingredient_name": "Green Beans",
+        "quantity": 0.16,
+        "unit": "kg"
+      },
+      {
+        "_id": "1d2ee52f0721b8673bd51891",
+        "ingredient_id": "472f0c34b707c93682cea31c",
+        "ingredient_name": "Garlic",
+        "quantity": 0.01,
+        "unit": "kg"
+      },
+      {
+        "_id": "cb45f352edf923fc47b61716",
+        "ingredient_id": "9fc41aef275ebe201071f531",
+        "ingredient_name": "Butter",
+        "quantity": 0.02,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "bf76c7506b5426040f1c48c8"
+    },
+    "name": "Side Salad",
+    "category": "Side",
+    "selling_price": 4.5,
+    "ingredients": [
+      {
+        "_id": "e33d98dcc670c6275a4d6040",
+        "ingredient_id": "4af601dfb241c159aaee482b",
+        "ingredient_name": "Lettuce",
+        "quantity": 0.07,
+        "unit": "kg"
+      },
+      {
+        "_id": "d189ce340e49d3e0e649e16a",
+        "ingredient_id": "c3cef70f429d9f0e6c3a5aaf",
+        "ingredient_name": "Cucumber",
+        "quantity": 0.05,
+        "unit": "kg"
+      },
+      {
+        "_id": "dde9e8cfad53aff1deafff03",
+        "ingredient_id": "4a7c85c9d870000950116090",
+        "ingredient_name": "Tomatoes",
+        "quantity": 0.07,
+        "unit": "kg"
+      },
+      {
+        "_id": "4e29f4c797d486eee8b759c5",
+        "ingredient_id": "fcd862c72832614947f5f2ca",
+        "ingredient_name": "Olive Oil",
+        "quantity": 0.015,
+        "unit": "L"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "06a077250a026af309e949a2"
+    },
+    "name": "Roasted Root Vegetables",
+    "category": "Side",
+    "selling_price": 5,
+    "ingredients": [
+      {
+        "_id": "07419db64839d9a638453ce1",
+        "ingredient_id": "4792aef62051880f15634f87",
+        "ingredient_name": "Carrots",
+        "quantity": 0.12,
+        "unit": "kg"
+      },
+      {
+        "_id": "677a2178723ad87cdab0b254",
+        "ingredient_id": "ac1c411abc6d2edaee1c34e9",
+        "ingredient_name": "Beetroot",
+        "quantity": 0.1,
+        "unit": "kg"
+      },
+      {
+        "_id": "3f7b18907e8ce3e5af49fd46",
+        "ingredient_id": "fcd862c72832614947f5f2ca",
+        "ingredient_name": "Olive Oil",
+        "quantity": 0.02,
+        "unit": "L"
+      },
+      {
+        "_id": "de1cf2a565fc5839875baaee",
+        "ingredient_id": "8edfba369b49e4a4513d3082",
+        "ingredient_name": "Fresh Thyme",
+        "quantity": 0.004,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "2acc15f2225a54d9e2fd9d6a"
+    },
+    "name": "Chocolate Brownie",
+    "category": "Dessert",
+    "selling_price": 8,
+    "ingredients": [
+      {
+        "_id": "c05bd4c58e8270663795ad5c",
+        "ingredient_id": "565a4f6006a5f34c8042957a",
+        "ingredient_name": "Dark Chocolate",
+        "quantity": 0.07,
+        "unit": "kg"
+      },
+      {
+        "_id": "167055fbb5274f3591125446",
+        "ingredient_id": "9fc41aef275ebe201071f531",
+        "ingredient_name": "Butter",
+        "quantity": 0.05,
+        "unit": "kg"
+      },
+      {
+        "_id": "768958e6ebe55f9c3ed94033",
+        "ingredient_id": "5486a1c88b2232878f1d828e",
+        "ingredient_name": "Caster Sugar",
+        "quantity": 0.07,
+        "unit": "kg"
+      },
+      {
+        "_id": "923911b69e2ac83dfb762901",
+        "ingredient_id": "a833b2189b5a7140be8ad8f6",
+        "ingredient_name": "Eggs",
+        "quantity": 1,
+        "unit": "each"
+      },
+      {
+        "_id": "395772e9d6ea709298a374c2",
+        "ingredient_id": "a6054382adcdaf482ad9213f",
+        "ingredient_name": "Plain Flour",
+        "quantity": 0.04,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "8d84d2c046b8b8a411a67707"
+    },
+    "name": "Apple Crumble",
+    "category": "Dessert",
+    "selling_price": 7.5,
+    "ingredients": [
+      {
+        "_id": "f690781f828af67bd708b8f8",
+        "ingredient_id": "321a0659f7b72c843c474874",
+        "ingredient_name": "Apples",
+        "quantity": 0.2,
+        "unit": "kg"
+      },
+      {
+        "_id": "ad96ce2e1c4a17985c71b981",
+        "ingredient_id": "a6054382adcdaf482ad9213f",
+        "ingredient_name": "Plain Flour",
+        "quantity": 0.05,
+        "unit": "kg"
+      },
+      {
+        "_id": "6c1ae2fbba02150021b55353",
+        "ingredient_id": "9fc41aef275ebe201071f531",
+        "ingredient_name": "Butter",
+        "quantity": 0.04,
+        "unit": "kg"
+      },
+      {
+        "_id": "8c90a9434e0d2cdc66f93735",
+        "ingredient_id": "061c1307fdfc95a472c14111",
+        "ingredient_name": "Brown Sugar",
+        "quantity": 0.05,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "cef11e9fc45b1e9228a04bd1"
+    },
+    "name": "Strawberry Cheesecake",
+    "category": "Dessert",
+    "selling_price": 8,
+    "ingredients": [
+      {
+        "_id": "6c41731bc70ba137c7b87d5e",
+        "ingredient_id": "9424ce6818efb1f948dd9ad0",
+        "ingredient_name": "Strawberries",
+        "quantity": 0.12,
+        "unit": "kg"
+      },
+      {
+        "_id": "26b6ddcd82c1d1ccdaabbfaf",
+        "ingredient_id": "1eb2a7bfa19d9e4cb1b05252",
+        "ingredient_name": "Greek Yoghurt",
+        "quantity": 0.1,
+        "unit": "kg"
+      },
+      {
+        "_id": "2ad0136dd19aecdccef25bdf",
+        "ingredient_id": "5486a1c88b2232878f1d828e",
+        "ingredient_name": "Caster Sugar",
+        "quantity": 0.04,
+        "unit": "kg"
+      },
+      {
+        "_id": "bb90f06720d47d6df4658f79",
+        "ingredient_id": "66c0f772edc9caecfda4b87b",
+        "ingredient_name": "Oats",
+        "quantity": 0.04,
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "8dc0659d29b2cb70001e19ce"
+    },
+    "name": "Blueberry Pancakes",
+    "category": "Dessert",
+    "selling_price": 7,
+    "ingredients": [
+      {
+        "_id": "f8226e01cc3a65c2342fa0ff",
+        "ingredient_id": "0496f6274fe393ee0847d881",
+        "ingredient_name": "Blueberries",
+        "quantity": 0.1,
+        "unit": "kg"
+      },
+      {
+        "_id": "27e962921c93edeb6b18850a",
+        "ingredient_id": "a6054382adcdaf482ad9213f",
+        "ingredient_name": "Plain Flour",
+        "quantity": 0.1,
+        "unit": "kg"
+      },
+      {
+        "_id": "986d92576b64c8fff2103ffb",
+        "ingredient_id": "a833b2189b5a7140be8ad8f6",
+        "ingredient_name": "Eggs",
+        "quantity": 1,
+        "unit": "each"
+      },
+      {
+        "_id": "5df4b989cbd04be3746991dd",
+        "ingredient_id": "5f021553b1e5a32e0ef97b14",
+        "ingredient_name": "Whole Milk",
+        "quantity": 0.12,
+        "unit": "L"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "c7eadbdb49a8c3d60b512cf8"
+    },
+    "name": "Chocolate Mousse",
+    "category": "Dessert",
+    "selling_price": 8,
+    "ingredients": [
+      {
+        "_id": "0c702f173903869fd0fd45cc",
+        "ingredient_id": "565a4f6006a5f34c8042957a",
+        "ingredient_name": "Dark Chocolate",
+        "quantity": 0.07,
+        "unit": "kg"
+      },
+      {
+        "_id": "a5a17e6264509a90bb387c2d",
+        "ingredient_id": "23694aaccea6e8041a381ec1",
+        "ingredient_name": "Double Cream",
+        "quantity": 0.12,
+        "unit": "L"
+      },
+      {
+        "_id": "f1d4d47ff57ad825d5446ed3",
+        "ingredient_id": "5486a1c88b2232878f1d828e",
+        "ingredient_name": "Caster Sugar",
+        "quantity": 0.025,
+        "unit": "kg"
+      },
+      {
+        "_id": "30783a55d1043d628469aa46",
+        "ingredient_id": "a833b2189b5a7140be8ad8f6",
+        "ingredient_name": "Eggs",
+        "quantity": 1,
+        "unit": "each"
+      }
+    ]
+  }
+]

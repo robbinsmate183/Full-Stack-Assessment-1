@@ -612,3 +612,62 @@ def delete_dish_ingredient(dish_id, entry_id):
     return jsonify({
         "message": "Embedded ingredient deleted successfully"
     }), 200
+
+
+
+
+@dishes_bp.get("/dishes/<dish_id>/cost")
+@token_required
+def get_dish_cost(dish_id):
+
+    if not ObjectId.is_valid(dish_id):
+        return jsonify({"error": "Invalid dish ID"}), 400
+
+    dish = dishes_collection.find_one({
+        "_id": ObjectId(dish_id)
+    })
+
+    if dish is None:
+        return jsonify({"error": "Dish not found"}), 404
+
+    total_cost = 0
+
+    for ingredient in dish.get("ingredients", []):
+
+        ingredient_id = ingredient.get("ingredient_id")
+
+        if not ObjectId.is_valid(ingredient_id):
+            return jsonify({"error": "Invalid ingredient ID"}), 400
+
+        main_ingredient = ingredients_collection.find_one({
+            "_id": ObjectId(ingredient_id)
+        })
+
+        if main_ingredient is None:
+            return jsonify({"error": "Ingredient not found"}), 404
+
+        if ingredient["unit"] != main_ingredient["unit"]:
+            return jsonify({"error": "Ingredient units do not match"}), 400
+
+        ingredient_cost = ingredient["quantity"] * main_ingredient["purchase_cost"]
+
+        total_cost += ingredient_cost
+
+    selling_price = dish["selling_price"]
+
+    gross_profit = selling_price - total_cost
+
+    if selling_price > 0:
+        food_cost_percentage = (total_cost / selling_price) * 100
+        food_cost_percentage = round(food_cost_percentage, 2)
+    else:
+        food_cost_percentage = None
+
+    return jsonify({
+        "selling_price": round(selling_price, 2),
+        "total_ingredient_cost": round(total_cost, 2),
+        "estimated_gross_profit": round(gross_profit, 2),
+        "food_cost_percentage": food_cost_percentage
+    }), 200
+
+
