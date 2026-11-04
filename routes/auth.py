@@ -1,3 +1,4 @@
+
 from flask import Blueprint, request, jsonify
 from database import users_collection
 from dotenv import load_dotenv
@@ -10,6 +11,7 @@ load_dotenv()
 auth_bp = Blueprint("auth", __name__)
 
 
+# Login Function
 @auth_bp.post("/login")
 def login():
 
@@ -44,6 +46,7 @@ def login():
     return jsonify({"error": "Invalid username or password"}), 401
 
 
+# Check User Token Function
 def token_required(f):
 
     @wraps(f)
@@ -51,9 +54,11 @@ def token_required(f):
 
         token = request.headers.get("x-access-token")
 
+        # Validation for missing token
         if not token:
             return jsonify({"error": "Token is missing"}), 401
 
+        # Validation for expired or invalid token
         try:
             data = jwt.decode(
                 token,
@@ -72,6 +77,7 @@ def token_required(f):
     return decorated
 
 
+# Check Admin Access Function
 def admin_required(f):
 
     @wraps(f)
@@ -85,6 +91,7 @@ def admin_required(f):
             algorithms=["HS256"]
         )
 
+        # Validation for admin role
         if data.get("role") != "admin":
             return jsonify({"error": "Admin access required"}), 403
 
@@ -93,7 +100,7 @@ def admin_required(f):
     return decorated
 
 
-
+# Create User Function
 @auth_bp.post("/users")
 @token_required
 @admin_required
@@ -101,11 +108,13 @@ def create_user():
 
     data = request.get_json(silent=True)
 
+    # Validation for data being inputted 
     if not isinstance(data, dict):
         return jsonify({"error": "Invalid user data"}), 400
 
     required_fields = ["username", "password", "role"]
 
+    # Validation for required fields
     for field in required_fields:
         if field not in data:
             return jsonify({"error": "Missing required field", "field": field}), 400
@@ -114,19 +123,23 @@ def create_user():
     password = data["password"]
     role = data["role"]
 
+    # Validation for username
     if not isinstance(username, str) or not username.strip():
         return jsonify({"error": "Invalid username"}), 400
 
     username = username.strip()
 
+    # Validation for password
     if not isinstance(password, str) or not password or len(password.encode("utf-8")) > 72:
         return jsonify({"error": "Invalid password"}), 400
 
+    # Validation for user role
     if not isinstance(role, str) or role not in ["staff", "admin"]:
         return jsonify({"error": "Invalid role"}), 400
 
     existing_user = users_collection.find_one({"username": username})
 
+    # Validation for existing username
     if existing_user is not None:
         return jsonify({"error": "Username already exists"}), 409
 
@@ -148,6 +161,7 @@ def create_user():
 
 
 
+# Get All Users Function
 @auth_bp.get("/users")
 @token_required
 @admin_required
@@ -161,11 +175,13 @@ def get_users():
     return jsonify(users), 200
 
 
+# Get One User Function
 @auth_bp.get("/users/<user_id>")
 @token_required
 @admin_required
 def get_one_user(user_id):
 
+    # Validation for user ID
     if not ObjectId.is_valid(user_id):
         return jsonify({"error": "Invalid user ID"}), 400
 
@@ -174,6 +190,7 @@ def get_one_user(user_id):
         {"password": 0}
     )
 
+    # Validation for user not found
     if user is None:
         return jsonify({"error": "User not found"}), 404
 
@@ -182,32 +199,38 @@ def get_one_user(user_id):
     return jsonify(user), 200
 
 
+# Update User Function
 @auth_bp.patch("/users/<user_id>")
 @token_required
 @admin_required
 def update_user(user_id):
 
+    # Validation for user ID
     if not ObjectId.is_valid(user_id):
         return jsonify({"error": "Invalid user ID"}), 400
 
     data = request.get_json(silent=True)
 
+    # Validation for update data
     if not isinstance(data, dict) or not data:
         return jsonify({"error": "No update data provided"}), 400
 
     allowed_fields = ["username", "password", "role"]
 
+    # Validation for allowed fields
     for field in data:
         if field not in allowed_fields:
             return jsonify({"error": "Invalid field", "field": field}), 400
 
     user = users_collection.find_one({"_id": ObjectId(user_id)})
 
+    # Validation for user not found
     if user is None:
         return jsonify({"error": "User not found"}), 404
 
     if "username" in data:
 
+        # Validation for username
         if not isinstance(data["username"], str) or not data["username"].strip():
             return jsonify({"error": "Invalid username"}), 400
 
@@ -217,6 +240,7 @@ def update_user(user_id):
             "username": data["username"]
         })
 
+        # Validation for existing username
         if existing_user is not None and existing_user["_id"] != user["_id"]:
             return jsonify({"error": "Username already exists"}), 409
 
@@ -224,6 +248,7 @@ def update_user(user_id):
 
         password = data["password"]
 
+        # Validation for password
         if not isinstance(password, str) or not password or len(password.encode("utf-8")) > 72:
             return jsonify({"error": "Invalid password"}), 400
 
@@ -234,9 +259,11 @@ def update_user(user_id):
 
     if "role" in data:
 
+        # Validation for user role
         if not isinstance(data["role"], str) or data["role"] not in ["staff", "admin"]:
             return jsonify({"error": "Invalid role"}), 400
 
+        # Validation to prevent removing the last admin role
         if user["role"] == "admin" and data["role"] == "staff":
 
             admin_count = users_collection.count_documents({"role": "admin"})
@@ -251,20 +278,23 @@ def update_user(user_id):
 
     return jsonify({"message": "User updated successfully"}), 200
 
-
+# Delete User Function
 @auth_bp.delete("/users/<user_id>")
 @token_required
 @admin_required
 def delete_user(user_id):
 
+    # Validation for user ID
     if not ObjectId.is_valid(user_id):
         return jsonify({"error": "Invalid user ID"}), 400
 
     user = users_collection.find_one({"_id": ObjectId(user_id)})
 
+    # Validation for user not found
     if user is None:
         return jsonify({"error": "User not found"}), 404
 
+    # Validation to prevent deleting the last admin
     if user["role"] == "admin":
 
         admin_count = users_collection.count_documents({"role": "admin"})

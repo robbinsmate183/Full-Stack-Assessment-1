@@ -1,7 +1,7 @@
 from database import users_collection
 import bcrypt, getpass
 
-
+# Create Admin function
 def create_admin():
 
     username = "admin"
@@ -35,7 +35,7 @@ def create_admin():
 
     print("Admin account created successfully")
 
-
+# Create Staff Function
 def create_staff():
 
     username = "staff"

@@ -1,3 +1,4 @@
+
 from flask import Blueprint, request, jsonify
 from database import ingredients_collection
 from routes.auth import token_required, admin_required
@@ -20,16 +21,19 @@ required_fields = [
 ]
 
 
+# Create Ingredient Function
 @ingredients_bp.post("/ingredients")
 @token_required
 def add_ingredient():
     data = request.get_json()
 
+    # Validation for ingredient data
     if not isinstance(data, dict):
         return jsonify({"error": "Invalid ingredient data"}), 400
 
     missing_fields = []
 
+    # Validation for required fields
     for field in required_fields:
         if field not in data:
             missing_fields.append(field)
@@ -42,6 +46,7 @@ def add_ingredient():
 
     stock_quantity = data["stock_quantity"]
 
+    # Validation for stock quantity
     if (
         isinstance(stock_quantity, bool)
         or not isinstance(stock_quantity, (int, float))
@@ -51,6 +56,7 @@ def add_ingredient():
 
     purchase_cost = data["purchase_cost"]
 
+    # Validation for purchase cost
     if (
         isinstance(purchase_cost, bool)
         or not isinstance(purchase_cost, (int, float))
@@ -69,6 +75,7 @@ def add_ingredient():
 
 
 
+# Get All Ingredients Function
 @ingredients_bp.get("/ingredients")
 @token_required
 def get_ingredients():
@@ -82,9 +89,11 @@ def get_ingredients():
 
     allowed_sort_fields = ["name", "stock_quantity", "purchase_cost"]
 
+    # Validation for sort field
     if sort_field not in allowed_sort_fields:
         return jsonify({"error": "Invalid sort field"}), 400
 
+    # Validation for sort order
     if sort_order not in ["asc", "desc"]:
         return jsonify({"error": "Invalid sort order"}), 400
 
@@ -93,12 +102,14 @@ def get_ingredients():
     page_value = request.args.get("page", "1")
     limit_value = request.args.get("limit", "10")
 
+    # Validation for page and limit values
     if not page_value.isdigit() or not limit_value.isdigit():
         return jsonify({"error": "Invalid page or limit"}), 400
 
     page = int(page_value)
     limit = int(limit_value)
 
+    # Validation for pagination range
     if page < 1 or limit < 1 or limit > 100:
         return jsonify({"error": "Invalid page or limit"}), 400
 
@@ -139,17 +150,20 @@ def get_ingredients():
     }), 200
 
 
+# Get Expiring Ingredients Function
 @ingredients_bp.get("/ingredients/expiring")
 @token_required
 def get_expiring_ingredients():
 
     days_value = request.args.get("days", "7")
 
+    # Validation for days value
     if not days_value.isdigit():
         return jsonify({"error": "Invalid days value"}), 400
 
     days = int(days_value)
 
+    # Validation for date range
     try:
         today = date.today()
         cutoff_date = today + timedelta(days=days)
@@ -162,6 +176,7 @@ def get_expiring_ingredients():
 
     for ingredient in ingredients:
 
+        # Validation for expiry date format
         try:
             expiry_date = datetime.strptime(
                 ingredient["expiry_date"], "%d/%m/%Y"
@@ -182,6 +197,7 @@ def get_expiring_ingredients():
     return jsonify(expiring_ingredients), 200
 
 
+# Get One Ingredient Function
 @ingredients_bp.get("/ingredients/<ingredient_id>")
 @token_required
 def get_one_ingredient(ingredient_id):
@@ -190,9 +206,11 @@ def get_one_ingredient(ingredient_id):
             {"_id": ObjectId(ingredient_id)}
         )
 
+    # Validation for ingredient ID
     except (InvalidId, TypeError):
         return jsonify({"error": "Invalid ingredient ID"}), 400
 
+    # Validation for ingredient not found
     if ingredient is None:
         return jsonify({"error": "Ingredient not found"}), 404
 
@@ -200,14 +218,17 @@ def get_one_ingredient(ingredient_id):
     return jsonify(ingredient), 200
 
 
+# Update Ingredient Function
 @ingredients_bp.patch("/ingredients/<ingredient_id>")
 @token_required
 def update_ingredient(ingredient_id):
     data = request.get_json()
 
+    # Validation for update data
     if not isinstance(data, dict) or not data:
         return jsonify({"error": "No update data provided"}), 400
 
+    # Validation to prevent changing ingredient ID
     if "_id" in data:
         return jsonify({"error": "Cannot update ingredient ID"}), 400
 
@@ -217,15 +238,18 @@ def update_ingredient(ingredient_id):
             {"$set": data}
         )
 
+    # Validation for ingredient ID
     except (InvalidId, TypeError):
         return jsonify({"error": "Invalid ingredient ID"}), 400
 
+    # Validation for ingredient not found
     if result.matched_count == 0:
         return jsonify({"error": "Ingredient not found"}), 404
 
     return jsonify({"message": "Ingredient updated successfully"}), 200
 
 
+# Delete Ingredient Function
 @ingredients_bp.delete("/ingredients/<ingredient_id>")
 @token_required
 @admin_required
@@ -235,26 +259,31 @@ def delete_ingredient(ingredient_id):
             {"_id": ObjectId(ingredient_id)}
         )
 
+    # Validation for ingredient ID
     except (InvalidId, TypeError):
         return jsonify({"error": "Invalid ingredient ID"}), 400
 
+    # Validation for ingredient not found
     if result.deleted_count == 0:
         return jsonify({"error": "Ingredient not found"}), 404
 
     return jsonify({"message": "Ingredient deleted successfully"}), 200
 
 
+# Get Low Stock Ingredients Function
 @ingredients_bp.get("/ingredients/low-stock")
 @token_required
 def get_low_stock_ingredients():
 
     threshold_value = request.args.get("threshold", "10")
 
+    # Validation for threshold value
     try:
         threshold = float(threshold_value)
     except (ValueError, TypeError):
         return jsonify({"error": "Invalid threshold"}), 400
 
+    # Validation for negative or invalid threshold
     if not math.isfinite(threshold) or threshold < 0:
         return jsonify({"error": "Invalid threshold"}), 400
 
