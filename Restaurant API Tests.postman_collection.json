@@ -111,7 +111,7 @@
         "header": [
           {
             "key": "x-access-token",
-            "value": ""
+            "value": "{{admin_token}}"
           }
         ],
         "url": {
@@ -706,7 +706,7 @@
     },
     {
       "key": "base_url",
-      "value": ""
+      "value": "http://127.0.0.1:5001"
     },
     {
       "key": "admin_token",
